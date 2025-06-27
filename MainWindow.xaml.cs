@@ -479,18 +479,22 @@ namespace Sus_Companion
                 }
             }
 
-            // Build the stats display
-            Span span = new();
-            span.Inlines.Add(new Run($"{aliveCount} Alive") { Foreground = Brushes.White });
-            span.Inlines.Add(new Run("   -   "));
-            span.Inlines.Add(new Run($"{safeCount} Safe") { Foreground = Brushes.LimeGreen });
-            span.Inlines.Add(new Run("   -   "));
-            span.Inlines.Add(new Run($"{susCount} Sus") { Foreground = Brushes.Red });
-            span.Inlines.Add(new Run("   -   "));
-            span.Inlines.Add(new Run($"{deadCount} Dead") { Foreground = Brushes.DarkSlateGray });
+            // Build the stats display using a TextBlock so colors are preserved
+            TextBlock statsBlock = new()
+            {
+                TextAlignment = TextAlignment.Center
+            };
+
+            statsBlock.Inlines.Add(new Run($"{aliveCount} Alive") { Foreground = Brushes.White });
+            statsBlock.Inlines.Add(new Run("   -   "));
+            statsBlock.Inlines.Add(new Run($"{safeCount} Safe") { Foreground = Brushes.LimeGreen });
+            statsBlock.Inlines.Add(new Run("   -   "));
+            statsBlock.Inlines.Add(new Run($"{susCount} Sus") { Foreground = Brushes.Red });
+            statsBlock.Inlines.Add(new Run("   -   "));
+            statsBlock.Inlines.Add(new Run($"{deadCount} Dead") { Foreground = Brushes.DarkSlateGray });
 
             // Update the Stats label with the new content
-            Stats.Content = span;
+            Stats.Content = statsBlock;
         }
 
         /// <summary>
